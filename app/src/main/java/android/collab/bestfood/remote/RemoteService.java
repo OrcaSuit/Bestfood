@@ -28,15 +28,68 @@ import retrofit2.http.Query;
  */
 public interface RemoteService {
     String BASE_URL = "http://192.168.0.57:3000/";
-
+    String MEMBER_ICON_URL = BASE_URL + "/member/";
+    String IMAGE_URL = BASE_URL + "/img/";
 
     //사용자 정보
     @GET("/member/{phone}")
     Call<MemberInfoItem> selectMemberInfo(@Path("phone") String phone);
 
+    @POST("/member/info")
+    Call<String> insertMemberInfo(@Body MemberInfoItem memberInfoItem);
+
     @FormUrlEncoded
     @POST("/member/phone")
     Call<String> insertMemberPhone(@Field("phone") String phone);
+
+    @Multipart
+    @POST("/member/icon_upload")
+    Call<ResponseBody> uploadMemberIcon(@Part("member_seq") RequestBody memberSeq,
+                                        @Part MultipartBody.Part file);
+
+    //맛집 정보
+    @GET("/food/info/{info_seq}")
+    Call<FoodInfoItem> selectFoodInfo(@Path("info_seq") int foodInfoSeq,
+                                      @Query("member_seq") int memberSeq);
+
+    @POST("/food/info")
+    Call<String> insertFoodInfo(@Body FoodInfoItem infoItem);
+
+    @Multipart
+    @POST("/food/info/image")
+    Call<ResponseBody> uploadFoodImage(@Part("info_seq") RequestBody infoSeq,
+                                       @Part("image_memo") RequestBody imageMemo,
+                                       @Part MultipartBody.Part file);
+
+    @GET("/food/list")
+    Call<ArrayList<FoodInfoItem>> listFoodInfo(@Query("member_seq") int memberSeq,
+                                               @Query("user_latitude") double userLatitude,
+                                               @Query("user_longitude") double userLongitude,
+                                               @Query("order_type") String orderType,
+                                               @Query("current_page") int currentPage);
+
+
+    //지도
+    @GET("/food/map/list")
+    Call<ArrayList<FoodInfoItem>> listMap(@Query("member_seq") int memberSeq,
+                                          @Query("latitude") double latitude,
+                                          @Query("longitude") double longitude,
+                                          @Query("distance") int distance,
+                                          @Query("user_latitude") double userLatitude,
+                                          @Query("user_longitude") double userLongitude);
+
+
+    //즐겨찾기
+    @POST("/keep/{member_seq}/{info_seq}")
+    Call<String> insertKeep(@Path("member_seq") int memberSeq, @Path("info_seq") int infoSeq);
+
+    @DELETE("/keep/{member_seq}/{info_seq}")
+    Call<String> deleteKeep(@Path("member_seq") int memberSeq, @Path("info_seq") int infoSeq);
+
+    @GET("/keep/list")
+    Call<ArrayList<KeepItem>> listKeep(@Query("member_seq") int memberSeq,
+                                       @Query("user_latitude") double userLatitude,
+                                       @Query("user_longitude") double userLongitude);
 
 
 

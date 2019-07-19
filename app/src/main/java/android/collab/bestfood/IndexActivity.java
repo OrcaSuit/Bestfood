@@ -1,9 +1,10 @@
 package android.collab.bestfood;
 
+import android.app.Application;
+import android.collab.bestfood.item.FoodInfoItem;
 import android.collab.bestfood.item.MemberInfoItem;
 import android.collab.bestfood.lib.EtcLib;
 import android.collab.bestfood.lib.GeoLib;
-import android.collab.bestfood.lib.MyApp;
 import android.collab.bestfood.lib.MyLog;
 import android.collab.bestfood.lib.RemoteLib;
 import android.collab.bestfood.remote.RemoteService;
@@ -13,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -129,10 +131,12 @@ public class IndexActivity extends AppCompatActivity {
         if(item == null || item.seq <= 0 ) {
             insertMemberPhone();
         }
+
+        Intent intent = new Intent(IndexActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     //폰의 전화번호를 서버에 저장.
-
     private void insertMemberPhone() {
         String phone = EtcLib.getInstance().getPhoneNumber(context);
         RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
@@ -150,5 +154,42 @@ public class IndexActivity extends AppCompatActivity {
                 MyLog.d(TAG, "no internet connectivity");
             }
         });
+    }
+
+    //앱 전역에서 사용할 수 있는 클래스
+    public static class MyApp extends Application {
+        private MemberInfoItem memberInfoItem;
+        private FoodInfoItem foodInfoItem;
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+
+            //FileUriExposedException 문제를 해결하기 위한 코드
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        }
+
+        public MemberInfoItem getMemberInfoItem(){
+            if(memberInfoItem == null) memberInfoItem = new MemberInfoItem();
+
+            return memberInfoItem;
+        }
+
+        public void setMemberInfoItem(MemberInfoItem item){
+            this.memberInfoItem = item;
+        }
+
+        public int getMemberSeq() {
+            return memberInfoItem.seq;
+        }
+
+        public void setFoodInfoItem(FoodInfoItem foodInfoItem){
+            this.foodInfoItem = foodInfoItem;
+        }
+
+        public FoodInfoItem getFoodInfoItem() {
+            return foodInfoItem;
+        }
     }
 }

@@ -1,7 +1,6 @@
 package android.collab.bestfood.lib;
 
 import android.app.AlertDialog;
-import android.collab.bestfood.KeepLib;
 import android.collab.bestfood.R;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,7 +46,7 @@ public class DialogLib {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        KeepLib.getInstance().insertKeep(handler, memberSeq, infoSeq);
+//                        KeepLib.getInstance().insertKeep(handler, memberSeq, infoSeq);
                     }
                 })
                 .show();
@@ -74,7 +73,7 @@ public class DialogLib {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        KeepLib.getInstance().deleteKeep(handler, memberSeq, infoSeq);
+//                        KeepLib.getInstance().deleteKeep(handler, memberSeq, infoSeq);
                     }
                 })
                 .show();

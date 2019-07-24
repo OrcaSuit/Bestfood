@@ -1,7 +1,6 @@
 package android.collab.bestfood;
 
-import android.app.Application;
-import android.collab.bestfood.item.FoodInfoItem;
+
 import android.collab.bestfood.item.MemberInfoItem;
 import android.collab.bestfood.lib.EtcLib;
 import android.collab.bestfood.lib.GeoLib;
@@ -14,7 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -96,14 +95,13 @@ public class IndexActivity extends AppCompatActivity {
                 MemberInfoItem item = response.body();
 
                 if(response.isSuccessful() && !StringLib.getInstance().isBlank(item.name)){
-                    MyLog.d(TAG, "success" + response.body().toString());
+                    MyLog.d(TAG, "success1" + response.body().toString());
                     setMemberInfoItem(item);
                 } else {
                     MyLog.d(TAG, "not success");
                     goProfileActivity(item);
                 }
             }
-
             @Override
             public void onFailure(Call<MemberInfoItem> call, Throwable t) {
                 MyLog.d(TAG, "no internet connectivity");
@@ -112,13 +110,23 @@ public class IndexActivity extends AppCompatActivity {
         });
     }
 
-    //전달받은 MemverInfoItem을 Application 객체에 저장한다. 그리고 StatMain() 메소드를 호출한다. @param item 사용자 정보
-    private void setMemberInfoItem(MemberInfoItem item){
-        ((MyApp)getApplicationContext()).setMemberInfoItem(item);
+    /**
+     * 전달받은 MemberInfoItem을 Application 객체에 저장한다.
+     * 그리고 startMain() 메소드를 호출한다.
+     *
+     * @param item 사용자 정보
+     */
+
+    private void setMemberInfoItem(MemberInfoItem item) {
+        ((MyApp) getApplicationContext()).setMemberInfoItem(item);
+
         startMain();
     }
 
-    public void startMain(){
+    /**
+     * MainActivity를 실행하고 현재 액티비티를 종료한다.
+     */
+    public void startMain() {
         Intent intent = new Intent(IndexActivity.this, MainActivity.class);
         startActivity(intent);
 
@@ -147,6 +155,7 @@ public class IndexActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     MyLog.d(TAG, "success insert id " + response.body().toString());
+
                 }
             }
             @Override
@@ -156,40 +165,5 @@ public class IndexActivity extends AppCompatActivity {
         });
     }
 
-    //앱 전역에서 사용할 수 있는 클래스
-    public static class MyApp extends Application {
-        private MemberInfoItem memberInfoItem;
-        private FoodInfoItem foodInfoItem;
 
-        @Override
-        public void onCreate() {
-            super.onCreate();
-
-            //FileUriExposedException 문제를 해결하기 위한 코드
-            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-            StrictMode.setVmPolicy(builder.build());
-        }
-
-        public MemberInfoItem getMemberInfoItem(){
-            if(memberInfoItem == null) memberInfoItem = new MemberInfoItem();
-
-            return memberInfoItem;
-        }
-
-        public void setMemberInfoItem(MemberInfoItem item){
-            this.memberInfoItem = item;
-        }
-
-        public int getMemberSeq() {
-            return memberInfoItem.seq;
-        }
-
-        public void setFoodInfoItem(FoodInfoItem foodInfoItem){
-            this.foodInfoItem = foodInfoItem;
-        }
-
-        public FoodInfoItem getFoodInfoItem() {
-            return foodInfoItem;
-        }
-    }
 }

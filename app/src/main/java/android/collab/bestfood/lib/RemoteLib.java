@@ -59,5 +59,77 @@ public class RemoteLib {
         }
     }
 
+    /**
+     * 사용자 프로필 아이콘을 서버에 업로드한다.
+     * @param memberSeq 사용자 일련번호
+     * @param file 파일 객체
+     */
+    public void uploadMemberIcon(int memberSeq, File file) {
+        RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
 
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        RequestBody memberSeqBody =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), "" + memberSeq);
+
+        Call<ResponseBody> call =
+                remoteService.uploadMemberIcon(memberSeqBody, body);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call,
+                                   Response<ResponseBody> response) {
+                MyLog.d(TAG, "uploadMemberIcon success");
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                MyLog.e(TAG, "uploadMemberIcon fail");
+            }
+        });
+    }
+
+    /**
+     * 맛집 이미지를 서버에 업로드한다.
+     * @param infoSeq 맛집 정보 일련번호
+     * @param imageMemo 이미지 설명
+     * @param file 파일 객체
+     * @param handler 처리 결과를 응답할 핸들러
+     */
+    public void uploadFoodImage(int infoSeq, String imageMemo, File file, final Handler handler) {
+        RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
+
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        RequestBody infoSeqBody =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), "" + infoSeq);
+        RequestBody imageMemoBody =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), imageMemo);
+
+        Call<ResponseBody> call =
+                remoteService.uploadFoodImage(infoSeqBody, imageMemoBody, body);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call,
+                                   Response<ResponseBody> response) {
+                MyLog.d(TAG, "uploadFoodImage success");
+                handler.sendEmptyMessage(0);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                MyLog.e(TAG, "uploadFoodImage fail");
+            }
+        });
+    }
 }

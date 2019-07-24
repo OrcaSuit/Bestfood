@@ -1,5 +1,6 @@
 package android.collab.bestfood.lib;
 
+import android.collab.bestfood.BestFoodRegisterActivity;
 import android.collab.bestfood.ProfileActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -77,9 +78,9 @@ public class GoLib {
      * @param context 컨텍스트
      */
     public void goBestFoodRegisterActivity(Context context) {
-       // Intent intent = new Intent(context, BestFoodRegisterActivity.class);
-       // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-       // context.startActivity(intent);
+        Intent intent = new Intent(context, BestFoodRegisterActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
 
@@ -89,8 +90,8 @@ public class GoLib {
      * @param infoSeq 맛집 정보 일련번호
      */
     public void goBestFoodInfoActivity(Context context, int infoSeq) {
-       // Intent intent = new Intent(context, BestFoodInfoActivity.class);
-      //  intent.putExtra(BestFoodInfoActivity.INFO_SEQ, infoSeq);
-      //  context.startActivity(intent);
+        //Intent intent = new Intent(context, BestFoodInfoActivity.class);
+        //intent.putExtra(BestFoodInfoActivity.INFO_SEQ, infoSeq);
+        //context.startActivity(intent);
     }
 }

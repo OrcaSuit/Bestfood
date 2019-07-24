@@ -111,5 +111,6 @@
 
     <!-- 즐겨찾기 -->
     <string name="no_keep">즐겨찾기에 등록된 음식점이 없습니다.</string>
+    <string name="API_KEY" templateMergeStrategy="preserve" translatable="false">AIzaSyAL6zmuJ2mMIEx_9GBp8hlPKO8ug6bTLvQ</string>
 
 </resources>

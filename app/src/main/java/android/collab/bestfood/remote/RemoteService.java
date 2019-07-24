@@ -1,7 +1,6 @@
 package android.collab.bestfood.remote;
 
 
-
 import android.collab.bestfood.item.FoodInfoItem;
 import android.collab.bestfood.item.KeepItem;
 import android.collab.bestfood.item.MemberInfoItem;
@@ -13,6 +12,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -23,11 +23,12 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+
 /**
  * 서버에 호출할 메소드를 선언하는 인터페이스
  */
 public interface RemoteService {
-    String BASE_URL = "http://192.168.0.57:3000/";
+    String BASE_URL = "http://192.168.0.57:3000";
     String MEMBER_ICON_URL = BASE_URL + "/member/";
     String IMAGE_URL = BASE_URL + "/img/";
 
@@ -90,7 +91,4 @@ public interface RemoteService {
     Call<ArrayList<KeepItem>> listKeep(@Query("member_seq") int memberSeq,
                                        @Query("user_latitude") double userLatitude,
                                        @Query("user_longitude") double userLongitude);
-
-
-
 }

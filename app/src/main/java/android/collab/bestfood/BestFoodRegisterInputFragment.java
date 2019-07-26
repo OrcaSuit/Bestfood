@@ -94,7 +94,7 @@ public class BestFoodRegisterInputFragment extends Fragment implements View.OnCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = this.getActivity();
         address = GeoLib.getInstance().getAddressString(context,
-                       new LatLng(infoItem.latitude, infoItem.longitude));
+                new LatLng(infoItem.latitude, infoItem.longitude));
         MyLog.d(TAG, "address" + address);
 
         return inflater.inflate(R.layout.fragment_bestfood_register_input, container, false);
@@ -225,6 +225,7 @@ public class BestFoodRegisterInputFragment extends Fragment implements View.OnCl
      * 맛집 이미지를 등록할 수 있는 프래그먼트로 이동한다.
      */
     private void goNextPage() {
-        GoLib.getInstance().goFragmentBack(getFragmentManager(), R.id.content_main, BestFoodRegisterImageFragment.newInstance(infoItem.seq));
+        GoLib.getInstance().goFragmentBack(getFragmentManager(),
+                R.id.content_main, BestFoodRegisterImageFragment.newInstance(infoItem.seq));
     }
 }

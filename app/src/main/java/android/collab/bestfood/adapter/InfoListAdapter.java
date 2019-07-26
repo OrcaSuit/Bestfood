@@ -208,6 +208,7 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.ViewHo
             keep = (ImageView) itemView.findViewById(R.id.keep);
             name = (TextView) itemView.findViewById(R.id.name);
             description = (TextView) itemView.findViewById(R.id.description);
+
         }
     }
 }

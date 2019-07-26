@@ -58,6 +58,7 @@ public class BestFoodListFragment extends Fragment implements View.OnClickListen
 
     /**
      * BestFoodListFragment 인스턴스를 생성한다.
+     *
      * @return BestFoodListFragment 인스턴스
      */
     public static BestFoodListFragment newInstance() {
@@ -67,8 +68,9 @@ public class BestFoodListFragment extends Fragment implements View.OnClickListen
 
     /**
      * fragment_bestfood_list.xml 기반으로 뷰를 생성한다.
-     * @param inflater XML를 객체로 변환하는 LayoutInflater 객체
-     * @param container null이 아니라면 부모 뷰
+     *
+     * @param inflater           XML를 객체로 변환하는 LayoutInflater 객체
+     * @param container          null이 아니라면 부모 뷰
      * @param savedInstanceState null이 아니라면 이전에 저장된 상태를 가진 객체
      * @return 생성한 뷰 객체
      */
@@ -76,7 +78,7 @@ public class BestFoodListFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = this.getActivity();
 
-        memberSeq = ((MyApp)this.getActivity().getApplication()).getMemberSeq();
+        memberSeq = ((MyApp) this.getActivity().getApplication()).getMemberSeq();
 
         View layout = inflater.inflate(R.layout.fragment_bestfood_list, container, false);
 
@@ -103,7 +105,8 @@ public class BestFoodListFragment extends Fragment implements View.OnClickListen
 
     /**
      * onCreateView() 메소드 뒤에 호출되며 화면 뷰들을 설정한다.
-     * @param view onCreateView() 메소드에 의해 반환된 뷰
+     *
+     * @param view               onCreateView() 메소드에 의해 반환된 뷰
      * @param savedInstanceState null이 아니라면 이전에 저장된 상태를 가진 객체
      */
     @Override
@@ -134,6 +137,7 @@ public class BestFoodListFragment extends Fragment implements View.OnClickListen
 
     /**
      * 맛집 정보를 스태거드그리드레이아웃으로 보여주도록 설정한다.
+     *
      * @param row 스태거드그리드레이아웃에 사용할 열의 개수
      */
     private void setLayoutManager(int row) {
@@ -164,16 +168,17 @@ public class BestFoodListFragment extends Fragment implements View.OnClickListen
 
     /**
      * 서버에서 맛집 정보를 조회한다.
-     * @param memberSeq 사용자 시퀀스
-     * @param userLatLng 사용자 위도 경도 객체
-     * @param orderType 맛집 정보 정렬 순서
+     *
+     * @param memberSeq   사용자 시퀀스
+     * @param userLatLng  사용자 위도 경도 객체
+     * @param orderType   맛집 정보 정렬 순서
      * @param currentPage 현재 페이지
      */
     private void listInfo(int memberSeq, LatLng userLatLng, String orderType, final int currentPage) {
         RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
 
         Call<ArrayList<FoodInfoItem>> call = remoteService.listFoodInfo(memberSeq, userLatLng.latitude,
-                                                userLatLng.longitude, orderType, currentPage);
+                userLatLng.longitude, orderType, currentPage);
         call.enqueue(new Callback<ArrayList<FoodInfoItem>>() {
             @Override
             public void onResponse(Call<ArrayList<FoodInfoItem>> call,
@@ -235,6 +240,7 @@ public class BestFoodListFragment extends Fragment implements View.OnClickListen
 
     /**
      * 맛집 정보 정렬 방식의 텍스트 색상을 설정한다.
+     *
      * @param color1 거리순 색상
      * @param color2 인기순 색상
      * @param color3 최근순 색상

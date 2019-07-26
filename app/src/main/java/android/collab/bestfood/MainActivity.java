@@ -4,34 +4,20 @@ import android.collab.bestfood.item.MemberInfoItem;
 import android.collab.bestfood.lib.GoLib;
 import android.collab.bestfood.lib.StringLib;
 import android.collab.bestfood.remote.RemoteService;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
-import android.util.Base64;
-import android.util.Log;
 import android.view.MenuItem;
-
-import com.google.android.material.navigation.NavigationView;
-import com.squareup.picasso.Picasso;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -66,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         headerLayout = navigationView.getHeaderView(0);
-        GoLib.getInstance().goFragment(getSupportFragmentManager(), R.id.content_main,BestFoodListFragment.newInstance());
+        GoLib.getInstance().goFragment(getSupportFragmentManager(), R.id.content_main, BestFoodListFragment.newInstance());
     }
 
     //프로필 정보는 별도 액티비티에서 변경 될수 있음, 변경을 바로 감지하기 위해 화면이 새로 보여질 때마다 setProfileView 호출.
@@ -121,14 +107,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_list) {
-             GoLib.getInstance().goFragment(getSupportFragmentManager(), R.id.content_main, BestFoodListFragment.newInstance());
+            GoLib.getInstance().goFragment(getSupportFragmentManager(), R.id.content_main, BestFoodListFragment.newInstance());
 
         } else if (id == R.id.nav_map) {
-            //      GoLib.getInstance().goFragment(getSupportFragmentManager(), R.id.content_main, BestFoodMapFragment.newInstance());
+            GoLib.getInstance().goFragment(getSupportFragmentManager(), R.id.content_main, BestFoodMapFragment.newInstance());
 
         } else if (id == R.id.nav_keep) {
-            // GoLib.getInstance().goFragment(getSupportFragmentManager(),
-            //  R.id.content_main, BestFoodKeepFragment.newInstance());
+            GoLib.getInstance().goFragment(getSupportFragmentManager(),
+            R.id.content_main, BestFoodKeepFragment.newInstance());
 
         } else if (id == R.id.nav_register) {
             GoLib.getInstance().goBestFoodRegisterActivity(this);
@@ -139,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 
 }

@@ -21,7 +21,7 @@
     <string name="network_not_working">네크워크에 연결되어 있지 않습니다.\n확인후 다시 실행해주세요.</string>
 
     <!-- 왼쪽 메뉴 -->
-    <string name="nav_list">맛집리스트</string>
+    <string name="nav_list">맛집 리스트</string>
     <string name="nav_map">지도리스트</string>
     <string name="nav_keep">즐겨찾기</string>
     <string name="nav_register">맛집등록</string>
@@ -111,6 +111,8 @@
 
     <!-- 즐겨찾기 -->
     <string name="no_keep">즐겨찾기에 등록된 음식점이 없습니다.</string>
+
+
     <string name="API_KEY" templateMergeStrategy="preserve" translatable="false">AIzaSyAL6zmuJ2mMIEx_9GBp8hlPKO8ug6bTLvQ</string>
 
 </resources>
